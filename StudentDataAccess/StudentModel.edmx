@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_a06c09_studentdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ExamDetails">
+          <Key>
+            <PropertyRef Name="Examvenue" />
+          </Key>
+          <Property Name="Examvenue" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="SubjectOne" Type="nvarchar(max)" />
+          <Property Name="SubjectTwo" Type="nvarchar(max)" />
+          <Property Name="SubjectThree" Type="nvarchar(max)" />
+          <Property Name="SubjectFour" Type="nvarchar(max)" />
+          <Property Name="DateCreated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="StudentID" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'db_a06c09_studentdb.dbo.Results' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="SubjectOne" />
+            <PropertyRef Name="SubjectTwo" />
+            <PropertyRef Name="SubjectThree" />
+            <PropertyRef Name="SubjectFour" />
+            <PropertyRef Name="Aggregate" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="StudentID" Type="varchar(max)" Nullable="false" />
+          <Property Name="SubjectOne" Type="int" Nullable="false" />
+          <Property Name="SubjectTwo" Type="int" Nullable="false" />
+          <Property Name="SubjectThree" Type="int" Nullable="false" />
+          <Property Name="SubjectFour" Type="int" Nullable="false" />
+          <Property Name="Aggregate" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Department" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="db_a06c09_studentdbModelStoreContainer">
+          <EntitySet Name="ExamDetails" EntityType="Self.ExamDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Results" EntityType="Self.Results" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Results].[StudentID] AS [StudentID], 
+    [Results].[SubjectOne] AS [SubjectOne], 
+    [Results].[SubjectTwo] AS [SubjectTwo], 
+    [Results].[SubjectThree] AS [SubjectThree], 
+    [Results].[SubjectFour] AS [SubjectFour], 
+    [Results].[Aggregate] AS [Aggregate], 
+    [Results].[Status] AS [Status]
+    FROM [dbo].[Results] AS [Results]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_a06c09_studentdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ExamDetail">
+          <Key>
+            <PropertyRef Name="Examvenue" />
+          </Key>
+          <Property Name="Examvenue" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SubjectOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectTwo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectThree" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectFour" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="StudentID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="SubjectOne" />
+            <PropertyRef Name="SubjectTwo" />
+            <PropertyRef Name="SubjectThree" />
+            <PropertyRef Name="SubjectFour" />
+            <PropertyRef Name="Aggregate" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="StudentID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubjectOne" Type="Int32" Nullable="false" />
+          <Property Name="SubjectTwo" Type="Int32" Nullable="false" />
+          <Property Name="SubjectThree" Type="Int32" Nullable="false" />
+          <Property Name="SubjectFour" Type="Int32" Nullable="false" />
+          <Property Name="Aggregate" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="db_a06c09_studentdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ExamDetails" EntityType="Self.ExamDetail" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Results" EntityType="Self.Result" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_a06c09_studentdbModelStoreContainer" CdmEntityContainer="db_a06c09_studentdbEntities">
+          <EntitySetMapping Name="ExamDetails">
+            <EntityTypeMapping TypeName="db_a06c09_studentdbModel.ExamDetail">
+              <MappingFragment StoreEntitySet="ExamDetails">
+                <ScalarProperty Name="Examvenue" ColumnName="Examvenue" />
+                <ScalarProperty Name="SubjectOne" ColumnName="SubjectOne" />
+                <ScalarProperty Name="SubjectTwo" ColumnName="SubjectTwo" />
+                <ScalarProperty Name="SubjectThree" ColumnName="SubjectThree" />
+                <ScalarProperty Name="SubjectFour" ColumnName="SubjectFour" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="db_a06c09_studentdbModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="db_a06c09_studentdbModel.Result">
+              <MappingFragment StoreEntitySet="Results">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="SubjectOne" ColumnName="SubjectOne" />
+                <ScalarProperty Name="SubjectTwo" ColumnName="SubjectTwo" />
+                <ScalarProperty Name="SubjectThree" ColumnName="SubjectThree" />
+                <ScalarProperty Name="SubjectFour" ColumnName="SubjectFour" />
+                <ScalarProperty Name="Aggregate" ColumnName="Aggregate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
